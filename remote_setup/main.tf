@@ -43,9 +43,7 @@ resource "azurerm_role_assignment" "gh_actions" {
 
 resource "github_actions_secret" "actions_secret" {
   for_each = {
-    
-    RESOURCE_GROUP      = azurerm_storage_account.sa.resource_group_name
-    ARM_CLIENT_ID       = azuread_service_principal.gh_actions.application_id
+        ARM_CLIENT_ID       = azuread_service_principal.gh_actions.application_id
     ARM_CLIENT_SECRET   = azuread_service_principal_password.gh_actions.value
     ARM_SUBSCRIPTION_ID = data.azurerm_subscription.current.subscription_id
     ARM_TENANT_ID       = data.azuread_client_config.current.tenant_id
