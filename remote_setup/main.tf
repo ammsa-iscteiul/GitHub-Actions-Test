@@ -69,6 +69,9 @@ resource "azurerm_storage_container" "ct" {
 
 resource "github_actions_secret" "actions_secret" {
   for_each = {
+    STORAGE_ACCOUNT     = azurerm_storage_account.sa.name
+    RESOURCE_GROUP      = azurerm_storage_account.sa.resource_group_name
+    CONTAINER_NAME      = azurerm_storage_container.ct.name
     ARM_CLIENT_ID       = azuread_service_principal.gh_actions.application_id
     ARM_CLIENT_SECRET   = azuread_service_principal_password.gh_actions.value
     ARM_SUBSCRIPTION_ID = data.azurerm_subscription.current.subscription_id
